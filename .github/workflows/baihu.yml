@@ -36,7 +36,7 @@ jobs:
           context: ./Baihu
           push: true
           tags: |
-            ghcr.io/${{ steps.lower-repo.outputs.repository }}/inspiration:latest
+            ghcr.io/${{ steps.lower-repo.outputs.repository }}/inspirationer:latest
           labels: |
             org.opencontainers.image.source=https://github.com/${{ steps.lower-repo.outputs.repository }}
             org.opencontainers.image.description=Baihu Docker Image
