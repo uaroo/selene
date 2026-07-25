@@ -24,10 +24,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - id: lower-repo
-        shell: pwsh
+      # 💡 优化：换成标准的 bash 并使用 $GITHUB_OUTPUT 转小写
+      - name: Lowercase Repository Name
+        id: lower-repo
         run: |
-          "::set-output name=repository::$($env:GITHUB_REPOSITORY.ToLowerInvariant())"
+          echo "repository=${GITHUB_REPOSITORY,,}" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -37,7 +38,7 @@ jobs:
           tags: |
             ghcr.io/${{ steps.lower-repo.outputs.repository }}/inspiration:latest
           labels: |
-            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.source=https://github.com/${{ steps.lower-repo.outputs.repository }}
             org.opencontainers.image.description=Baihu Docker Image
             org.opencontainers.image.licenses=MIT
           cache-from: type=gha
