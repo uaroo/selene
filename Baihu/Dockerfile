@@ -2,7 +2,10 @@ FROM ghcr.io/engigu/baihu:latest
 
 ENV REMOTE_FOLDER="huggingface:/baihu"
 
-RUN apt-get update && apt-get install -y rclone jq xvfb
+RUN apt-get update && apt-get install -y jq xvfb curl \
+    && curl -fsSL https://rclone.org/install.sh | bash \
+    && rclone version \
+    
 RUN rclone config -h
 COPY ./restore.sh /
 RUN sed -i '/^exec baihu server$/d' /app/docker-entrypoint.sh
