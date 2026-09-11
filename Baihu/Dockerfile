@@ -2,7 +2,7 @@ FROM ghcr.io/engigu/baihu:latest
 
 ENV REMOTE_FOLDER="huggingface:/baihu"
 
-RUN apt-get update && apt-get install -y jq xvfb curl \
+RUN apt-get update && apt-get install -y jq xvfb curl unzip \
     && curl -fsSL https://rclone.org/install.sh | bash \
     && rclone version
     
