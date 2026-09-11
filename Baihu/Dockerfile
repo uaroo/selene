@@ -4,7 +4,7 @@ ENV REMOTE_FOLDER="huggingface:/baihu"
 
 RUN apt-get update && apt-get install -y jq xvfb curl \
     && curl -fsSL https://rclone.org/install.sh | bash \
-    && rclone version \
+    && rclone version
     
 RUN rclone config -h
 COPY ./restore.sh /
